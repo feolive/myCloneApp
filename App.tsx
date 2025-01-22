@@ -133,7 +133,9 @@ export default function App() {
       </View>
 
       <View style={styles.footer}>
-        
+        <TouchableOpacity style={styles.alert_btn} onPress={() => alert("Alert Button Pressed")}>
+          <Text style={{ fontSize: 16, fontWeight: 500, color: "#fff" }}>Alert</Text>
+        </TouchableOpacity>       
       </View>
     </View>
   );
