@@ -19,7 +19,10 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.header}>
         {!search_ph && (
-          <Text style={styles.placeholder}>Start your search</Text>
+          <View style={styles.placeholder}>            
+            <Image style={{width: 15, height: 15, marginRight: 5 }} source={require("./assets/search.png")}/>          
+            <Text>Start your search</Text>
+          </View>
         )}
         <TextInput
           style={styles.h_search}
