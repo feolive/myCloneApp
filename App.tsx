@@ -84,7 +84,7 @@ export default function App() {
             value={switch_on}
             onChange={() => {
               setSwitch_on(!switch_on);
-              setPrice(switch_on ? "1,000" : "6,000");
+              setPrice(switch_on ? "1,000" : "5,000");
             }}
           />
         </View>
@@ -132,7 +132,9 @@ export default function App() {
         </View>
       </View>
 
-      <View style={styles.footer}></View>
+      <View style={styles.footer}>
+        
+      </View>
     </View>
   );
 }
@@ -296,5 +298,13 @@ const styles = StyleSheet.create({
   /* footer */
   footer: {
     flex: 1,
+  },
+  alert_btn: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 80,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#000",
   },
 });
