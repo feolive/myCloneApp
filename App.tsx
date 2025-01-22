@@ -34,7 +34,6 @@ export default function App() {
                 style={styles.h_nav_img}
               />
               <Text>Cabins</Text>
-              <View style={styles.h_nav_selected}></View>
             </TouchableOpacity>
           </View>
           <View style={styles.h_nav_item}>
@@ -65,6 +64,7 @@ export default function App() {
             </TouchableOpacity>
           </View>
         </View>
+        <View style={styles.h_nav_selected}></View>
         <View style={styles.h_spliter}></View>
       </View>
 
@@ -147,9 +147,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   placeholder: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     position: "absolute",
     left: "25%",
-    top: "12.5%",
+    top: "15%",
     color: "#000",
     fontSize: 16,
     fontWeight: "bold",
@@ -191,6 +194,10 @@ const styles = StyleSheet.create({
     height: 40,
   },
   h_nav_selected: {
+    position: "absolute",
+    top: 130,
+    left: 25,
+    width: 44,
     height: 1,
     backgroundColor: "#000",
     borderWidth: 1,
