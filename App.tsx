@@ -4,14 +4,18 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   Image,
   TouchableOpacity,
+  Switch,
+  Pressable,
 } from "react-native";
 import { useState } from "react";
 
 export default function App() {
   const [search_ph, setSearch_ph] = useState("");
+  const [switch_on, setSwitch_on] = useState(false);
+  const [like, setLike] = useState(false);
+  const [price, setPrice] = useState("1,000");
 
   return (
     <View style={styles.container}>
@@ -67,16 +71,63 @@ export default function App() {
       </View>
 
       <View style={styles.main}>
-        <View></View>
+        <View style={styles.price_switch}>
+          <View style={styles.price_switch_text}>
+            <Text style={{ fontWeight: 500, fontSize: 14 }}>
+              Display total price
+            </Text>
+            <Text style={{ color: "#777" }}>
+              Includes all fees, before taxes
+            </Text>
+          </View>
+          <Switch
+            value={switch_on}
+            onChange={() => {
+              setSwitch_on(!switch_on);
+              setPrice(switch_on ? "1,000" : "6,000");
+            }}
+          />
+        </View>
         <View style={styles.card}>
+          <View style={styles.card_badge_layout}>
+            <View style={styles.card_badge}>
+              <Text style={{ fontSize: 12, fontWeight: 500 }}>
+                Guest Favorite
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.card_heart}
+              onPress={() => setLike(!like)}
+            >
+              { !like &&
+              (<Image
+                style={{ width: 28, height: 28 }}
+                source={require("./assets/heart.png")}
+              />)
+              }
+              {
+                like &&
+                (<Image
+                  style={{ width: 28, height: 28 }}
+                  source={require("./assets/heart-fill.png")}
+                />)
+              }
+            </TouchableOpacity>
+          </View>
           <Image
             source={require("./assets/forest-cabin.jpg")}
             style={styles.card_img}
           />
           <View style={styles.card_info}>
-            <Text style={styles.card_title}>Kimberley, Canada</Text>
+            <View style={styles.card_title_layout}>
+              <Text style={styles.card_title}>Kimberley, Canada</Text>
+              <Text>⭐️ 5.0</Text>
+            </View>
             <Text style={styles.card_subtitle}>206 kilometers away</Text>
             <Text style={styles.card_subtitle}>Feb 1-6</Text>
+            <View style={styles.card_price_layout}>
+              <Text style={styles.card_price}>${price} CAD</Text>
+            </View>
           </View>
         </View>
       </View>
@@ -104,6 +155,7 @@ const styles = StyleSheet.create({
     zIndex: 20,
     pointerEvents: "none",
   },
+  /* header */
   header: {
     flex: 1,
     height: 100,
@@ -148,12 +200,30 @@ const styles = StyleSheet.create({
     height: 1,
     boxShadow: "0 6px 8px 0 #000, 0 8px 20px 0 rgba(0, 0, 0, 0.19)",
   },
-
+  /* main area */
   main: {
     flex: 4,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    gap: 15,
+  },
+  price_switch: {
+    width: 300,
+    height: 60,
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+  },
+  price_switch_text: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    fontSize: 12,
   },
   card: {
     flexDirection: "column",
@@ -173,6 +243,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
+  card_title_layout: {
+    width: 300,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
   card_title: {
     fontSize: 16,
     fontWeight: "500",
@@ -181,6 +257,43 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#777",
   },
+  card_price_layout: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  card_price: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  card_duration: {
+    fontSize: 16,
+    marginLeft: 5,
+  },
+  card_badge_layout: {
+    position: "absolute",
+    width: 280,
+    top: 10,
+    left: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    zIndex: 20,
+  },
+  card_badge: {
+    width: 100,
+    height: 28,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 15,
+  },
+  card_heart: {
+    width: 28,
+    height: 28,
+  },
+  /* footer */
   footer: {
     flex: 1,
   },
